@@ -6,8 +6,7 @@ class User:
         self.balance = balance
         self.transactions = [] if transactions is None else transactions
 
-    def register_number(self, numeber):
-        pass
+   
 
     @staticmethod
     def normalise_phone(raw):
@@ -30,6 +29,25 @@ class User:
     def widthraw_amount(self):
         pass
 
+users = {}
+
+def register_number(users,name,raw_phone):
+    phone = User.normalise_phone(raw_phone)
+    if phone is None:
+        return (False, "Invalid phone number")
+
+    if phone in users:
+        return (False, "Number already registered.") 
+
+    users[phone] = User(name,phone)
+
+    return (True, "Registration Succesful" )
+    
+print(register_number(users, "Amina", "0711111111"))
+print(register_number(users, "Amina", "+254711111111"))
+print(register_number(users, "Test", "07123"))
+print(len(users))
+        
 
 print(User.normalise_phone("0712345678"))
 print(User.normalise_phone("+254712345678"))

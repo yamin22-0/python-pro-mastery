@@ -1,4 +1,2 @@
-I would use Class to store User (phone_number,name and balance etc)
-I would use dictionary to store the transactions and transaction history.
-Use conditional statements for the transaction (widthraw) check the transaction if its 0 to 100 0,100 to 500 5,etc i would use if/elif,else and i would use if else also to check if user is register then he can send money , i would also still use it for checking amount b4 withdrawal (withdrawal + withdrawal fee etc)
-
+Create class user with __innit__ function that takes self,name,phone_number balance and transactions as attributes and register_user,send_money and withdraw_cash as methods.
+Phone normalisation -(1.Use .strip() to remove space from the end) , (2.use .startswith() - to validate if it starts with "+254" or "254" and remove to remain with only 100 digits also use this method to check if it's digits and if lenght is 10 and also if it starts with (07 or 01)) ,

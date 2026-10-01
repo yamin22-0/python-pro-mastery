@@ -1,12 +1,11 @@
-class User:
+from datetime import datetime
 
+class User:
     def __init__(self, name, phone_number, transactions=None, balance=0):
         self.name = name
         self.phone_number = phone_number
         self.balance = balance
         self.transactions = [] if transactions is None else transactions
-
-   
 
     @staticmethod
     def normalise_phone(raw):
@@ -23,15 +22,47 @@ class User:
 
         return raw
 
-    def send_money(self):
-        pass
 
-    def widthraw_amount(self):
-        pass
+def find_user(users, raw_phone):
+    phone = User.normalise_phone(raw_phone)
 
-users = {}
+    if phone is None:
+        return None
 
-def register_number(users,name,raw_phone):
+    if phone in users:
+        return users[phone]
+
+    return None
+
+
+def deposit(users, raw_phone, amount):
+    user = find_user(users, raw_phone)
+
+    if user is None:
+        return (False, "Number is not registered.")
+    try:
+        amount = float(amount)
+    except ValueError:
+        return (False, "Amount must be a number")
+
+    if amount <= 0:
+        return (False, "Enter a valid amount")
+
+    user.balance += amount
+
+    user.transactions.append({
+        "type": "deposit",
+        "amount": amount,
+        "fee": 0,
+        "other_party": None,
+        "balance_after": user.balance,
+        "time": datetime.now()
+    })
+
+    return (True, "Deposit Successful")
+
+
+def register_number(users, name, raw_phone):
     phone = User.normalise_phone(raw_phone)
     if phone is None:
         return (False, "Invalid phone number")
@@ -39,15 +70,18 @@ def register_number(users,name,raw_phone):
     if phone in users:
         return (False, "Number already registered.") 
 
-    users[phone] = User(name,phone)
+    users[phone] = User(name, phone)
 
-    return (True, "Registration Succesful" )
-    
+    return (True, "Registration Succesful")
+
+
+# --- Tests ---
+users = {}
+
 print(register_number(users, "Amina", "0711111111"))
 print(register_number(users, "Amina", "+254711111111"))
 print(register_number(users, "Test", "07123"))
 print(len(users))
-        
 
 print(User.normalise_phone("0712345678"))
 print(User.normalise_phone("+254712345678"))
@@ -58,44 +92,11 @@ print(User.normalise_phone("abc"))
 print(User.normalise_phone("0812345678"))
 print(User.normalise_phone("0712345"))
 
-
-
-
-
-
-
-
-
-
-
-
-
-# def main():
-#         while True:
-#             print("*/ -- Mini - M-Pesa SYS")
-#             print("1.Regiser Number:")
-#             print("2.Send Money:")
-#             print("3.Widthraw Cash:")
-#             print("4.Exit")
-
-#             choice = input("Choose an Option:")
-
-#             if choice == '1':
-#                 (input("Enter Phone to register: "))
-#                 print("Registration Succesful")
-#             elif choice == '2':
-#                 float(input("Enter Amount to send: "))
-#                 print("Amount sent succesfully")
-#             elif choice == '3':
-#                 float(input("Enter Amount to widthraw: "))
-#                 print("Amount widtrawal succesfull")
-#             elif choice == '4':
-#                 break
-#             else:
-#                 print("Choose a valid Operation")
-
-
-
-
-
-    
+print(deposit(users, "0711111111", 500))       
+print(deposit(users, "+254711111111", "250"))  
+print(deposit(users, "0799999999", 100))       
+print(deposit(users, "0711111111", 0))         
+print(deposit(users, "0711111111", -50))       
+print(deposit(users, "0711111111", "abc"))     
+print(users["0711111111"].balance)             
+print(len(users["0711111111"].transactions))

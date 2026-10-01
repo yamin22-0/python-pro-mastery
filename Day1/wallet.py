@@ -35,6 +35,7 @@ def find_user(users, raw_phone):
     return None
 
 
+
 def deposit(users, raw_phone, amount):
     user = find_user(users, raw_phone)
 
@@ -60,6 +61,39 @@ def deposit(users, raw_phone, amount):
     })
 
     return (True, "Deposit Successful")
+
+def withdraw(users,raw_phone,amount):
+    user = find_user(users,raw_phone)
+
+    if user is None:
+        return (False , "Number not registered.")
+
+    try:
+        amount = float(amount)
+    except ValueError:
+        return (False, "Amount must be a number.")
+
+    if amount <= 0:
+        return (False, "Amount can't be negative.")
+
+    fee = 10
+    total_deduction = amount + fee
+
+    if user.balance < total_deduction:
+        return (False, "Insufficient funds for the operation to continue.")
+
+    user.balance -= total_deduction
+
+    user.transactions.append({
+        "type" : "withdraw",
+        "amount" : amount,
+        "fee" : fee,
+        "balance_after" : user.balance,
+        "other_party": None,
+        "time" : datetime.now()
+    })
+
+    return (True, "Withdrawal succesful.")
 
 
 def register_number(users, name, raw_phone):
@@ -100,3 +134,17 @@ print(deposit(users, "0711111111", -50))
 print(deposit(users, "0711111111", "abc"))     
 print(users["0711111111"].balance)             
 print(len(users["0711111111"].transactions))
+
+register_number(users, "Amina", "0711111111")
+register_number(users, "Brian", "0722222222")
+deposit(users, "0711111111", 750)
+deposit(users, "0722222222", 750)
+
+print(withdraw(users, "0711111111", 740))     
+print(users["0711111111"].balance)            
+print(withdraw(users, "0711111111", 1))        
+print(withdraw(users, "0722222222", 741))      
+print(users["0722222222"].balance)             
+print(withdraw(users, "0722222222", 740))      
+print(withdraw(users, "0799999999", 100))      
+print(withdraw(users, "0722222222", "abc"))    

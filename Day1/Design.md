@@ -1,2 +1,5 @@
 Create class user with __innit__ function that takes self,name,phone_number balance and transactions as attributes and register_user,send_money and withdraw_cash as methods.
 Phone normalisation -(1.Use .strip() to remove space from the end) , (2.use .startswith() - to validate if it starts with "+254" or "254" and remove to remain with only 100 digits also use this method to check if it's digits and if lenght is 10 and also if it starts with (07 or 01)) ,
+I would use a find_user function - Looks if user is registered so that they can= continue to depositing or widthrawing or sending.
+Then i would add a Deposit Function which checks if a user exsists and then allows a user to deposit money so that they can send or widthraw.
+Add a widthraw function for widthrawal - It should first check if a user is registered then if check for amount (must be digits and not (-) should be above 0)

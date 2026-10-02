@@ -11,6 +11,8 @@
   (b) --> Each persons share will be calculated through the total being taken and divided by the number of people at the table.
             personal_bill = total / num_of_pple
 
+  (c) --> Tip can be 0
+
 ## What can go wrong ##
 4. (a) --> A user may enter a (-) negative number or 0.If amount is    negative or 0 the system should return ("Invalid Amount,Enter Amount)
    (b) --> A user may type words instead of Amount.If user enter words instead of number the system should return ("Invalid parameters, Provide correct details.)

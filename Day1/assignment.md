@@ -1,18 +1,19 @@
-Day 1: Mini Wallet (M-Pesa lite)
+Day 1: Bill Splitter
 
-Pure Python, no libraries, runs in the terminal.
+The problem in plain English: a group eats at a restaurant. The program asks for the total bill, how many people shared it, and the tip percentage. It then prints the total with tip, and how much each person pays.
 
-First, write 5–8 lines on how you'll store users and transactions. Then build a program where:
+Example: bill 2000, 4 people, tip 10%. The total is 2200 and each person pays 550.
 
-A user has a phone number, a name, and a balance
-You can register a user (no duplicate phone numbers)
-You can deposit money (amount must be positive)
-You can withdraw money, with a flat fee of 10 (the user needs balance plus fee)
-You can send money to another registered user. The fee is 0 up to 100, 5 up to 500, 10 up to 1000, and 20 above that. The sender pays the fee.
-You can't send to yourself or to an unregistered number
-Every action is recorded, and you can print a mini-statement (last 5 transactions) for any user
-Invalid input never crashes the program
+Do it in this order:
 
-Must pass: send 500 from a user with 505 (works, balance 0), send 500 from a user with 504 (rejected), withdraw exactly balance minus fee (works).
+Write your design note in DESIGN.md, using the four questions above. It should take 5 minutes. Your "what can go wrong" list should have at least two things (hint: look at the airtime example).
+Write the TODO comments for each step before you write any code.
+Write the code under the comments.
+Test it with the example above, and with 1 person.
 
-Warm-up: Two Sum. Solve it first the slow way, then with a dictionary.
+New tools for today (tiny examples with different data):
+
+python
+price = float(input("Price: "))     
+print(round(price / 3, 2))         
+print(f"Total is {price}")    

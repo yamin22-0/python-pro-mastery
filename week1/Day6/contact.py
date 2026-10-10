@@ -68,10 +68,6 @@ def contact_book():
                     print(f"Found: {name.title()} -> {phone}")
                     found += 1
 
-            if clean_find in contact_list:
-                phone = contact_list[clean_find]
-                print(f"Found: {clean_find.title()} -> {phone}")
-
             if found == 0:
                 print("Contact not found.")
 

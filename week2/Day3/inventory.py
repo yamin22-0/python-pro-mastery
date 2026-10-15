@@ -7,16 +7,15 @@
 #TODO: Output for low_stock(inventory,limit) - for stock that is at or below the limit.
 
 
-inventory = {}
 
 def add_item(inventory,name,quantity,price):
 
     name = name.strip().lower()
 
     if not name :
-        return False, "Item already exists."
+        return False, "Enter an Item please."
     elif name in inventory:
-        return False, "Enter an item please."
+        return False, "Item already exists."
     elif quantity < 0:
         return False, "Enter valid Quantity."
     elif price <= 0:
@@ -26,6 +25,32 @@ def add_item(inventory,name,quantity,price):
         return True, "Item added successfully"
 
 
+def total_value(inventory):
 
+    total = 0
+
+    for name, item in inventory.items():
+        total += item["qty"] * item["price"]
+
+    return total
+
+def sell_item(inventory,name,quantity):
+
+    name = name.strip().lower()
     
+
+    if not name:
+        return False, "Enter item please."
+    elif name not in inventory:
+        return False, "Enter item that exists."
+    elif quantity <= 0:
+        return False, "Low quantity restock to start selling.."
+    elif quantity > inventory[name]["qty"]:
+        return False, "Please restock to continue this order."
+    else:
+        inventory[name]["qty"] -= quantity
+        return True, "Item sold."
+
+
+
 

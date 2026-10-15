@@ -1,4 +1,4 @@
-from inventory import add_item,total_value,sell_item
+from inventory import add_item,total_value,sell_item,low_stock
 
 
 def test_add_item_good():
@@ -110,3 +110,30 @@ def test_sell_item_low_stock():
     assert result[0] == False
     assert inventory["wheatabix"]["qty"] == 5
 
+
+def test_low_stock_good():
+
+    inventory = {
+        "rice": {"qty":10,"price":120},
+        "beans": {"qty":3,"price":90}
+    }
+
+    result = low_stock(inventory,5)
+    assert result == ["beans"]
+
+def test_low_stock_exact_limit():
+
+    inventory = {
+        "sugar": {"qty":8,"price":180},
+        "beans": {"qty":3, "price":90}
+    }
+
+    result = low_stock(inventory,3)
+    assert result == ["beans"]
+
+def test_low_stock_empty_dictionary():
+
+    inventory = {}
+
+    result = low_stock(inventory,5)
+    assert result == []

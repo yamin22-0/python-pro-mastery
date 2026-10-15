@@ -51,6 +51,13 @@ def sell_item(inventory,name,quantity):
         inventory[name]["qty"] -= quantity
         return True, "Item sold."
 
+def low_stock(inventory,limit):
 
+    low_items = []
 
+    for name, item in inventory.items():
+        if item["qty"] <= limit:
+            low_items.append(name)
+
+    return low_items
 

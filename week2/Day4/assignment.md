@@ -18,12 +18,12 @@ Rules for all functions: clean titles with .strip().lower(). Functions print not
 
 Part A
 
-add_book(library, title, copies): rejects an empty title, a title that already exists, and copies below 1. On success it stores {"total": copies, "out": 0}.
-borrow_book(library, title): the book must exist, and at least one copy must be available (out is less than total). On success, out goes up by 1.
+1.add_book(library, title, copies): rejects an empty title, a title that already exists, and copies below 1. On success it stores {"total": copies, "out": 0}.
+2.borrow_book(library, title): the book must exist, and at least one copy must be available (out is less than total). On success, out goes up by 1.
 
 Part B
-3. return_book(library, title): the book must exist, and out must be above 0 (you can’t return a copy nobody borrowed). On success, out goes down by 1.
-4. available_books(library): returns a list of titles that have at least one available copy.
+3.return_book(library, title): the book must exist, and out must be above 0 (you can’t return a copy nobody borrowed). On success, out goes down by 1.
+4.available_books(library): returns a list of titles that have at least one available copy.
 
 Tests (at least these):
 

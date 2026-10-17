@@ -2,8 +2,9 @@
 
 ## What the system does. ##
 
-Keeps a library of books and how many copies are there,  It can add a book, borrow a book , return a book and check available books.
-Out means the books that have been borrowed,Available copies equals to total - out,
+Library Tracking: The system tracks books along with their total copies and how many are currently checked out (out).
+
+Availability Rule: A book can only be borrowed if available copies exist (total - out > 0). Borrowing fails only when all copies are already checked out (out == total).
 
 ## Data model ##
 
@@ -34,5 +35,24 @@ library[title] = {
     "total":copies,"out":0
 }
 `return True, "Book add succesfull."`
+
+## borrow_book - func What it takes,returns and what could go wrong ##
+
+**borrow_book(library,title)** : returns (True/False), "message"
+
+**What could go wrong** 
+
+User may enter empty title input. `return False, "Enter book title please."` . Nothing changes.
+
+-User may try to borrow a book that doesn't exist. `return False, "Sorry the book doesn't exist."`. Nothing changes.
+
+-User may try to borrow when there's only one copy remaining or no copies remaining. `return False, "Borrow limit reached."` Nothing changes.
+
+After succesfull borrow 
+library[title]["out"] += 1
+
+return True, "Book borrowed successfully."
+
+
 
 

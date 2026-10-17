@@ -1,5 +1,6 @@
 #TODO: PART A :
 #TODO: Validate for add_book(library,title,copies) function if book title is empty,there;s an existing copy of that book and if the number of copies is either negative number or 0.
+#TODO: Validate for borrow_book(library,title) - function if a book title is empty,if the book is in the system and if the books aren't at the limit of being borrowed.
 
 
 def add_book(library,title,copies):
@@ -16,3 +17,16 @@ def add_book(library,title,copies):
         library[title] = {"total":copies,"out":0}
         return True, "Book add successfull."
 
+def borrow_book(library,title):
+
+    title = title.strip().lower()
+
+    if not title:
+        return False, "Enter book title please."
+    elif title not in library:
+        return False, "Sorry, Book doesn't exist."
+    elif library[title]["out"] >= library[title]["total"]:
+        return False, "Borrow limit reached."
+    else:
+        library[title]["out"] += 1
+        return True, "Book borrowed successfully."

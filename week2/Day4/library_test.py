@@ -1,4 +1,4 @@
-from library import add_book
+from library import add_book,borrow_book
 
 def test_add_book_good():
 
@@ -62,3 +62,54 @@ def test_add_book_boundary():
     assert result[0] == True
     assert library["botany"]["total"] == 1
 
+def test_borrow_book_good():
+
+    library = {"python 101": {"total":3,"out":1}}
+
+    result = borrow_book(library,"python 101")
+    assert result[0] == True
+    assert result[1] == "Book borrowed successfully."
+    assert library["python 101"]["out"] == 2
+
+def test_borrow_book_last_copy():
+
+    library = {"chemistry": {"total":2,"out":1}}
+
+    result = borrow_book(library,"chemistry")
+    assert result[0] == True
+    assert library["chemistry"]["out"] == 2 
+
+def test_borrow_book_non_available():
+
+    library = {"mathematic": {"total":5,"out":5}}
+
+    result = borrow_book(library,"mathematic")
+    assert result[0] == False
+    assert library["mathematic"]["out"] == 5
+
+def test_borrow_book_missing_book():
+
+    library = {"english aid": {"total":6,"out":0}}
+
+    result = borrow_book(library,"tea")
+    assert result[0] == False
+    assert "tea" not in library
+    assert library["english aid"]["out"] == 0
+
+def test_borrow_book_empty_title():
+
+    library = {"history": {"total":3,"out":2}}
+
+    result = borrow_book(library," ")
+    assert result[0] == False
+    assert result[1] == "Enter book title please."
+    assert library["history"]["out"] == 2
+
+def test_borrow_book_title_cleaning():
+
+    library = {"geography": {"total":2,"out":1}}
+
+    result = borrow_book(library," GEOGRAPHY ")
+    assert result[0] == True
+    assert "geography" in library
+    assert " GEOGRAPHY " not in library

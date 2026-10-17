@@ -5,6 +5,7 @@ Keeps a shop's items with a quantity and a price. It can add an item, sell an it
 list items that are low in stock, and work out the total value of all the stock.
 
 ## Data model ##
+
 -An item has: name, qty (quantity), price.
 -The dictionary key is the cleaned lowercase name. The value is another dictionary.
 **Example:**

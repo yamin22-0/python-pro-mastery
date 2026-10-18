@@ -70,4 +70,16 @@ library[title]["out"] -= 1
 
 `return True, "Thank you for safely returning this book."`
 
+## available_books func what it takes returns and what go wrong ##
 
+**available_books(library)** : returns *a list of titles* that has at lease 1 available copy. 
+
+**What could go wrong**
+
+-The library might be completely empty (`{}`). `return []` *Nothing changes.*
+
+-All books might be completely checked out (`out == total` for every book). `return []` *Nothing changes.*
+
+-If every detail is correct:
+  Loops through the library, finds books where `out < total`, and stores their titles in a list.
+  `return available_titles_list` *(a list of strings)*

@@ -1,4 +1,4 @@
-from library import add_book,borrow_book,return_book
+from library import add_book,borrow_book,return_book,available_books
 
 def test_add_book_good():
 
@@ -166,3 +166,39 @@ def test_return_book_title_cleaning():
     assert "economics" in library
     assert " ECONOMICS " not in library
     assert library["economics"]["out"] == 3
+
+def test_available_books_mixed():
+
+    library = {"python 101": {"total": 3, "out": 1}, 
+               "kenya history": {"total": 2, "out": 2}}
+
+    result = available_books(library)
+    assert result == ["python 101"]
+
+def test_available_books_last_copy():
+
+    library = {"think big": {"total":3,"out":2}}
+
+    result = available_books(library)
+    assert result == ["think big"]
+
+def test_available_books_all_out():
+
+    library = {"80-20 principle": {"total":8,"out":8}}
+
+    result = available_books(library)
+    assert result == []
+
+def test_available_books_nothing_borrowed():
+
+    library = {"kaizen methods": {"total":9,"out":0}}
+
+    result = available_books(library)
+    assert result == ["kaizen methods"]
+
+def test_available_books_empty_library():
+
+    library = {}
+
+    result = available_books(library)
+    assert result == []

@@ -2,13 +2,13 @@ numbers = [1,2,3,4,1]
 
 def check_duplicate_numbers(numbers):
 
-    duplicate_num = []
+    seen = set()
 
     for number in numbers:
-        if number in duplicate_num:
+        if number in seen:
             return True
         else:
-            duplicate_num.append(number)
+            seen.add(number)
 
     return False
             

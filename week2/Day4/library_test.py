@@ -1,4 +1,4 @@
-from library import add_book,borrow_book
+from library import add_book,borrow_book,return_book
 
 def test_add_book_good():
 
@@ -113,3 +113,56 @@ def test_borrow_book_title_cleaning():
     assert result[0] == True
     assert "geography" in library
     assert " GEOGRAPHY " not in library
+
+def test_return_book_good():
+
+    library = {"css mastery": {"total":3,"out":2}}
+
+    result = return_book(library,"css mastery")
+    assert result[0] == True
+    assert result[1] == "Thank you for safely returning this book."
+    assert library["css mastery"]["out"] == 1
+
+def test_return_book_boundary():
+
+    library = {"business": {"total":2,"out":1}}
+
+    result = return_book(library,"business")
+    assert result[0] == True
+    assert library["business"]["out"] == 0
+
+def test_return_book_nothing_out():
+
+    library = {"math": {"total":10,"out":0}}
+
+    result = return_book(library,"math")
+    assert result[0] == False
+    assert library["math"]["out"] == 0
+
+def test_return_book_missing_book():
+
+    library = {"hadith": {"total":6,"out":4}}
+
+    result = return_book(library,"tafseer")
+    assert result[0] == False
+    assert "tafseer" not in library
+    assert library["hadith"]["out"] == 4
+
+def test_return_book_empty_title():
+
+    library = {"geology": {"total":7,"out":3}}
+
+    result = return_book(library," ")
+    assert result[0] == False
+    assert result[1] == "Enter book title please."
+    assert library["geology"]["out"] == 3
+
+def test_return_book_title_cleaning():
+
+    library = {"economics": {"total":6,"out":4}}
+
+    result = return_book(library," ECONOMICS ")
+    assert result[0] == True
+    assert "economics" in library
+    assert " ECONOMICS " not in library
+    assert library["economics"]["out"] == 3

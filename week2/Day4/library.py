@@ -30,3 +30,18 @@ def borrow_book(library,title):
     else:
         library[title]["out"] += 1
         return True, "Book borrowed successfully."
+
+def return_book(library,title):
+
+    title = title.strip().lower()
+
+    if not title:
+        return False, "Enter book title please."
+    elif title not in library:
+        return False, "Sorry, Book doesn't exist."
+    elif library[title]["out"] <= 0:
+        return  False, "Can only return books borrowed."
+    else:
+        library[title]["out"] -= 1
+        return True, "Thank you for safely returning this book."
+

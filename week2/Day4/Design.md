@@ -51,8 +51,23 @@ User may enter empty title input. `return False, "Enter book title please."` . N
 After succesfull borrow 
 library[title]["out"] += 1
 
-return True, "Book borrowed successfully."
+`return True, "Book borrowed successfully."`
 
+## return_book - func What it takes,returns and what could go wrong. ##
 
+**return_book(library,title)** : returns (True/False), "message"
+
+**What could go wrong**
+
+-User may enter empty title input. `return False, "Enter book title please."` . Nothing changes.
+
+-User may try to return a book that doesn't exist. `return False, "Sorry book doesn't exist."`. Nothing changes.
+
+-User may try to return a book even though he never borrowed in the first place. Eg 2 books on a shelf and someone tries to return the smae book but the systems sees that both books are on the shelf. `return False, "Can only return books borrowed."` Nothing changes.
+
+After successfull returning of book.
+library[title]["out"] -= 1
+
+`return True, "Thank you for safely returning this book."`
 
 

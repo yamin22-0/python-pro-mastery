@@ -31,4 +31,19 @@ def spent_by_category(expenses):
 
     return spent_per_category
 
+def top_category(expenses):
 
+    totals = spent_by_category(expenses)
+
+    best_category = None
+    best_total = None
+
+    for category,total in totals.items():
+
+        if best_total is None or total > best_total:
+            best_total = total
+            best_category = category
+
+    return best_category
+
+    

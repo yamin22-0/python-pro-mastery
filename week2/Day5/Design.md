@@ -43,4 +43,9 @@ On correct details:
 
 -returns a dictionary.. eg food:500 , oil:100 , food:200 becomes {"food":700,oil:100}
 
+## top_category(expenses) what it takes,returns and what could go wrong. ## 
 
+**top_category(expenses)** returns a category which has the highest value.
+
+-returns a single category with the highest valur.. eg food:500 , oil:100 , food:200 becomes {"food":700,oil:100} . `returns "food"`
+*beause it has the highest amount*

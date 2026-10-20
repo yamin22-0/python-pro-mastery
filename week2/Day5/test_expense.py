@@ -1,4 +1,4 @@
-from expense import add_expense,total_spent,spent_by_category
+from expense import add_expense,total_spent,spent_by_category,top_category
 
 ## tests for add_expense ##
 
@@ -116,4 +116,53 @@ def test_spent_by_category_one_category():
 
     result = spent_by_category(expenses)
     assert result == {"food":100}
+
+def test_top_category_multiple_summed_category():
+
+    expenses = [
+        {"category":"food","amount":200},
+        {"category":"oil","amount":100},
+        {"category":"food","amount":600}
+    ]
+
+    result = top_category(expenses)
+    assert result == "food"
+
+def test_top_category_empty():
+
+    expenses = []
+
+    result = top_category(expenses)
+    assert result == None
+
+def test_top_category_one_expense():
+
+    expenses = [
+        {"category":"oil","amount":100}
+    ]
+
+    result = top_category(expenses)
+    assert result == "oil"
+
+def test_top_category_tied_expense():
+
+    expenses = [
+        {"category":"oil","amount":100},
+        {"category":"fruits","amount":100}
+    ]
+
+    result = top_category(expenses)
+    assert result == "oil"
+
+def test_top_category_multiple_small_one_big_expense():
+
+    expenses = [
+        {"category":"oil","amount":100},
+        {"category":"oil","amount":100},
+        {"category":"oil","amount":100},
+        {"category":"vegetables","amount":100}
+    ]
+
+    result = top_category(expenses)
+    assert result == "oil"
 

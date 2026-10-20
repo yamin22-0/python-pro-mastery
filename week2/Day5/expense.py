@@ -13,5 +13,12 @@ def add_expense(expenses,category,amount):
         expenses.append({"category":category,"amount":amount})
         return True, "Expense tracked succesfully"
 
+def total_spent(expenses):
 
+    total = 0
+
+    for expense in expenses:
+        total += expense["amount"]
+
+    return total
 

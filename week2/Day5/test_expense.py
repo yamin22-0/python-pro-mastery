@@ -1,4 +1,6 @@
-from expense import add_expense
+from expense import add_expense,total_spent
+
+## tests for add_expense ##
 
 def test_add_expense_good():
 
@@ -52,3 +54,26 @@ def test_add_expenses_two_adds():
     assert result1[0] == True
     assert result2[0] == True
     assert len(expenses) == 2
+
+## Tests for total_spent ##
+
+def test_total_spent_multiple_expense():
+
+    expenses = [{"category": "food", "amount": 200}, {"category": "transport", "amount": 150}, {"category": "food", "amount": 300}]
+    result = total_spent(expenses)
+
+    assert result == 650
+
+def test_total_empty():
+
+    expenses = []
+    result = total_spent(expenses)
+
+    assert result == 0
+
+def test_total_one_expense():
+
+    expenses = [{"category": "food", "amount": 75}]
+    result = total_spent(expenses)
+
+    assert result == 75

@@ -31,4 +31,8 @@ On correct details:
     expenses = [ "category":"food","amount":10000]
 `return True, "Expenses tracked successfully."`
 
+## total_spent(expenses) what it takes,returns and what could go wrong. ## 
 
+**add_expense(expenses,category,amount)** returns (True, "message"), or (False, "message").
+
+-Calculates total(total += expense["amount"]) and `returns total`.

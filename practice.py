@@ -45,3 +45,22 @@ def running_max(numbers):
 print(running_max(numbers))
 print(running_max([2,2,1]))
 
+
+counts = {}
+for word in ["a", "b", "a"]:
+    counts[word] = counts.get(word, 0) + 1
+print(counts)  
+
+
+def get_player_score(games):
+
+    scores = {}
+
+    for name,score in games:
+
+        scores[name] = scores.get(name,0) + score
+
+    return scores
+
+games_data = [("Binyamin",25),("Khalid",30),("Binyamin",60),("Khalid",20)]
+print(get_player_score(games_data))

@@ -33,6 +33,14 @@ On correct details:
 
 ## total_spent(expenses) what it takes,returns and what could go wrong. ## 
 
-**add_expense(expenses,category,amount)** returns (True, "message"), or (False, "message").
+**total_spent(expenses)** returns a plain value(total) for total_spent.
 
 -Calculates total(total += expense["amount"]) and `returns total`.
+
+## spent_by_category(expenses) what it takes,returns and what could go wrong. ## 
+
+**spent_by_category(expenses)** returns a dictionary {}.
+
+-returns a dictionary.. eg food:500 , oil:100 , food:200 becomes {"food":700,oil:100}
+
+

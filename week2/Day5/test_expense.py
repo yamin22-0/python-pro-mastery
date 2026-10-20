@@ -1,4 +1,4 @@
-from expense import add_expense,total_spent
+from expense import add_expense,total_spent,spent_by_category
 
 ## tests for add_expense ##
 
@@ -77,3 +77,43 @@ def test_total_one_expense():
     result = total_spent(expenses)
 
     assert result == 75
+
+## Tests for spent_by_category ##
+
+def test_spent_by_category_multiple_expense():
+
+    expenses = [
+        {"category":"food","amount":200},
+        {"category":"transport","amount":400},
+        {"category":"food","amount":1000}
+    ]
+
+    result = spent_by_category(expenses)
+    assert result == {"food":1200,"transport":400}
+
+def test_spent_by_category_empty():
+
+    expenses = []
+
+    result = spent_by_category(expenses)
+    assert result == {}
+
+def test_spent_by_category_one_category_summed():
+
+    expenses = [
+        {"category":"food","amount":100},
+        {"category":"food","amount":400}
+    ]
+
+    result = spent_by_category(expenses)
+    assert result == {"food":500}
+
+def test_spent_by_category_one_category():
+
+    expenses = [
+        {"category":"food","amount":100},
+    ]
+
+    result = spent_by_category(expenses)
+    assert result == {"food":100}
+

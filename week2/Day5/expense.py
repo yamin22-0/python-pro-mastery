@@ -22,3 +22,13 @@ def total_spent(expenses):
 
     return total
 
+def spent_by_category(expenses):
+
+    spent_per_category = {}
+
+    for expense in expenses:
+        spent_per_category[expense["category"]] = spent_per_category.get(expense["category"], 0) + expense["amount"]
+
+    return spent_per_category
+
+

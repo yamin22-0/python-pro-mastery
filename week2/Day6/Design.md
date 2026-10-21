@@ -58,3 +58,12 @@ On correct details:
 
 On correct details:
 `return len(attendance[name])`
+## best_attendance(attendance) what it takes,returns and what could go wrong ##
+
+**best_attendance(attendance)** checks the student who has most attendances and returns his name and returns None if dictonary is empty.
+
+**What could go wrong**
+-The dictionary is empty (`{}`): Must check for this first and return `None` to prevent errors.
+-Ties (two or more students have the exact same highest number of days) (e.g., the first one encountered wins)
+-Prints nothing, changes nothing.
+

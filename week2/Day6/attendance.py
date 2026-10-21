@@ -33,8 +33,19 @@ def days_present(attendance,name):
 
     name = name.strip().lower()
 
-    if not name in attendance:
+    if name not in attendance:
         return None
     else:
         return len(attendance[name])
         
+def best_student(attendance):
+
+    best_name = None
+    attended_days = 0
+
+    for name, attended in attendance.items():
+        if len(attended) > attended_days:
+            attended_days = len(attended)
+            best_name = name
+
+    return best_name

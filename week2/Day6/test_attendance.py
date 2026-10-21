@@ -1,4 +1,4 @@
-from attendance import add_student,mark_present,days_present
+from attendance import add_student,mark_present,days_present,best_student
 
 ## Tests for add_student ##
 
@@ -148,7 +148,52 @@ def test_days_present_cleaning_name():
         "muhamud": {"26-07-2026"}
     }
 
-    result = days_present(attendance,"muhamud")
+    result = days_present(attendance," MUHAMUD ")
     assert "26-07-2026" in attendance["muhamud"]
     assert result == 1
-    
+
+def test_best_student_good():
+
+    attendance = {
+        "zakaria": {"21-10-2026"},
+        "hamza": {"21-10-2026", "22-10-2026", "23-10-2026"}
+    }
+
+    result = best_student(attendance)
+    assert result == "hamza"
+
+def test_best_student_empty():
+
+    attendance = {}
+
+    result = best_student(attendance)
+    assert result is None
+
+def test_best_student_one_student():
+
+    attendance = {
+        "hamza": {"21-10-2026", "22-10-2026", "23-10-2026"}
+    }
+
+    result = best_student(attendance)
+    assert result == "hamza"
+
+def test_best_student_tie_case():
+
+    attendance = {
+        "hamza": {"21-10-2026", "22-10-2026", "23-10-2026"},
+        "moha": {"21-10-2026", "23-10-2026", "24-10-2026"}
+    }
+
+    result = best_student(attendance)
+    assert result == "hamza"
+
+def test_best_student_all_zero_students():
+
+    attendance = {
+        "khaloo": set(),
+        "yussuf": set()
+    }
+
+    result = best_student(attendance)
+    assert result is None

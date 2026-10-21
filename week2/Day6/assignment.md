@@ -34,8 +34,8 @@ add_student(attendance, name): rejects an empty name and a name that already exi
 mark_present(attendance, name, date): the student must exist, and the date must not be empty. On success, it adds the date to the student’s set. Marking the same date twice is allowed and changes nothing (the set keeps it once), and it returns True.
 
 Part B
-3. days_present(attendance, name): returns the number of days the student was present, or None if the student doesn’t exist.
-4. best_attendance(attendance): returns the name of the student with the most days present, or None if there are no students. If two tie, the first one added wins.
+3.days_present(attendance, name): returns the number of days the student was present, or None if the student doesn’t exist.
+4.best_attendance(attendance): returns the name of the student with the most days present, or None if there are no students. If two tie, the first one added wins.
 
 Tests (at least these):
 

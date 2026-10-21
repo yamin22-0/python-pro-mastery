@@ -30,3 +30,19 @@ attendance = {
 On correct details:
     attendance[name] = set()
 `return True, "Student attendance tracked successfully."`
+
+
+## mark_present(attendance,name,date) what it takes,returns and what could go wrong. ## 
+
+**mark_present(attendance,name,date)** returns (True, "message"), or (False, "message").
+
+**What could go wrong**
+
+-User may try to enter an empty date input. `return False, "Please enter date."` *Nothing changes.*
+
+-User may try to add date for a student that doesn't exist exists . `return False, "Confirm if student exists."` *Nothing changes.*
+
+On correct details:
+    attendance[name].add(date)
+`return True, "Student attendance name and date tracked successfully."`
+

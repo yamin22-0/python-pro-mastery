@@ -64,3 +64,21 @@ def get_player_score(games):
 
 games_data = [("Binyamin",25),("Khalid",30),("Binyamin",60),("Khalid",20)]
 print(get_player_score(games_data))
+
+def valid_anagram(word1,word2):
+
+    words1 = {}
+
+    for letter in word1:
+        words1[letter] = words1.get(letter , 0) + 1
+
+    words2 = {}
+
+    for letter in word2:
+        words2[letter] = words2.get(letter, 0) + 1
+
+    return words1 == words2
+
+print(valid_anagram("silent","listen"))
+print(valid_anagram("cat","rat"))
+print(valid_anagram("aab","abb"))

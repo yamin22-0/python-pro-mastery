@@ -1,4 +1,4 @@
-from attendance import add_student,mark_present
+from attendance import add_student,mark_present,days_present
 
 ## Tests for add_student ##
 
@@ -48,6 +48,8 @@ def test_add_student_two_students():
     assert result2[0] == True
     assert result2[1] == "student attendance tracked successfully."
     assert len(attendance) == 2
+
+## Tests for mark_present ##
 
 def test_mark_present_good():
 
@@ -102,3 +104,51 @@ def test_mark_present_name_cleaning():
     assert " OMAR " not in attendance
     assert "21-10-2026" in attendance["omar"]
 
+## Tests for days_present() ##
+
+def test_days_present_two_days():
+
+    attendance = {
+        "amina": {"21-10-2026", "22-10-2026"}
+    }
+
+    result = days_present(attendance,"amina")
+    assert result == 2
+
+def test_days_present_one_day():
+
+    attendance = {
+        "farouq" : {"23-10-2026"}
+    }
+
+    result = days_present(attendance,"farouq")
+    assert result == 1
+
+def test_days_present_never_present_student():
+
+    attendance = {
+        "amish": set()
+    }
+
+    result = days_present(attendance,"amish")
+    assert result == 0
+
+def test_days_present_missing_student():
+   
+    attendance = {
+        "amish": set()
+    }
+
+    result = days_present(attendance,"ruqia")
+    assert result is None
+
+def test_days_present_cleaning_name():
+
+    attendance = {
+        "muhamud": {"26-07-2026"}
+    }
+
+    result = days_present(attendance,"muhamud")
+    assert "26-07-2026" in attendance["muhamud"]
+    assert result == 1
+    

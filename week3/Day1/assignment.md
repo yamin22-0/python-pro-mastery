@@ -56,11 +56,11 @@ add_debt(debts, name, amount): rejects an empty name and an amount of 0 or below
 total_owed(debts): returns one number, the sum of everything owed. An empty book gives 0.
 
 Part B (only after Part A is green)
-3. pay_debt(debts, name, amount): the customer must exist, the amount must be above 0, and it can’t be more than they owe. On success, subtract it. When the balance reaches exactly 0, remove the customer from the dictionary.
+3.pay_debt(debts, name, amount): the customer must exist, the amount must be above 0, and it can’t be more than they owe. On success, subtract it. When the balance reaches exactly 0, remove the customer from the dictionary.
 
 Part C (only after Part B is green)
-4. save_debts(debts, filename): writes the dictionary to the file. It returns nothing.
-5. load_debts(filename): reads the file and returns the dictionary. If the file doesn’t exist, it returns {}.
+4.save_debts(debts, filename): writes the dictionary to the file. It returns nothing.
+5.load_debts(filename): reads the file and returns the dictionary. If the file doesn’t exist, it returns {}.
 
 Tests to write
 Function	Test	Expected

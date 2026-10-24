@@ -1,4 +1,4 @@
-from debts import add_debt,total_owed
+from debts import add_debt,total_owed,pay_debt
 
 ## Tests for add_debt ##
 
@@ -55,6 +55,8 @@ def test_add_debt_cleaning_name():
     assert " ALI " not in debts
     assert debts["ali"] == 250
 
+## Tests for total_owed ##
+
 def test_total_owed_good():
 
     debts = {"binka":700,"hamza":1000}
@@ -66,4 +68,46 @@ def test_total_owed_zero_debts():
     debts = {}
     result = total_owed(debts)
     assert result == 0
+
+## Tests for pay_debts ##
+
+def test_pay_debt_good():
+    debts = {"amish": 800}
+    result = pay_debt(debts, "amish", 200)
+
+    assert result[0] == True
+    assert result[1] == "payment recorded."
+    assert debts["amish"] == 600
+
+def test_pay_debt_boundary():
+
+    debts = {"imran":500}
+    result = pay_debt(debts,"imran",500)
+
+    assert result[0] == True
+    assert "imran" not in debts
+
+def test_pay_debt_over_pay():
+
+    debts = {"ahmed":400}
+    result = pay_debt(debts,"ahmed",401)
+
+    assert result[0] == False
+    assert debts["ahmed"] == 400
+
+def test_test_pay_debt_non_existant_user():
+
+    debts = {"halima":230}
+    result = pay_debt(debts,"hali",230)
+
+    assert result[0] == False
+    assert "hali" not in debts
+
+def test_pay_debt_amount_zero():
+
+    debts = {"moha":1000}
+    result = pay_debt(debts,"moha",0)
+
+    assert result[0] == False
+    assert debts == {"moha":1000}
 

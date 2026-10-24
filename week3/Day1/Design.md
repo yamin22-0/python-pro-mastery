@@ -27,6 +27,10 @@ On correct details:
     debts[name] = debts.get(name, 0) + amount
 `return True, "debt added."`
 
+## total_owed(debts) what it takes,returns and what could go wrong. ## 
+
+**total_owed(debts)** returns sum of the dictionary and for an empty dictionary returns 0.
+
 ## What is saved ##
 
 **file name = debts.json**

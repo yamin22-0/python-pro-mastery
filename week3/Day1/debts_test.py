@@ -1,4 +1,4 @@
-from debts import add_debt
+from debts import add_debt,total_owed
 
 ## Tests for add_debt ##
 
@@ -54,3 +54,16 @@ def test_add_debt_cleaning_name():
     assert "ali" in debts
     assert " ALI " not in debts
     assert debts["ali"] == 250
+
+def test_total_owed_good():
+
+    debts = {"binka":700,"hamza":1000}
+    result = total_owed(debts)
+    assert result == 1700
+
+def test_total_owed_zero_debts():
+
+    debts = {}
+    result = total_owed(debts)
+    assert result == 0
+

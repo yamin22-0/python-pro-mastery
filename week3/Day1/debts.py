@@ -13,3 +13,11 @@ def add_debt(debts,name,amount):
         debts[name] = debts.get(name, 0) + amount
         return True, "debt added."
 
+def total_owed(debts):
+
+    owing = 0
+
+    for debt in debts.values():
+        owing += debt
+    return owing
+

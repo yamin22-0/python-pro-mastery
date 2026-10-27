@@ -1,3 +1,6 @@
+import json
+import os
+
 #TODO: PART A:
 #TODO: Check for add_debt(debts,name,amount): Make it so it rejects an empty name,amount of 0 and below and if a customer exists add amount to him if no exist create a new user.
 #TODO: PART B:
@@ -39,3 +42,15 @@ def pay_debt(debts,name,amount):
             del debts[name]
         return True, "payment recorded."
 
+def save_debts(debts,filename):
+
+    with open(filename,"w") as f:
+        json.dump(debts,f)
+    
+
+def load_debts(filename):
+
+    if not os.path.exists(filename):
+        return {}
+    with open(filename) as f:
+        return json.load(f)

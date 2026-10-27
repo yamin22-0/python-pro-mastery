@@ -1,4 +1,5 @@
-from debts import add_debt,total_owed,pay_debt
+from debts import add_debt,total_owed,pay_debt,save_debts,load_debts
+import json
 
 ## Tests for add_debt ##
 
@@ -110,4 +111,36 @@ def test_pay_debt_amount_zero():
 
     assert result[0] == False
     assert debts == {"moha":1000}
+
+def test_pay_debt_name_cleaning():
+
+    debts = {"amish":350}
+    result = pay_debt(debts," AMISH ",150)
+
+    assert result[0] == True
+    assert debts["amish"] == 200
+
+def test_save_debts_and_loaded(tmp_path):
+
+    filename = tmp_path / "debts.json"
+    debts = {"binka":200,"halima":500}
+    save_debts(debts,filename)
+
+    assert filename.exists
+
+    loaded = load_debts(filename)
+    assert loaded == debts
+
+def test_load_debts(tmp_path):
+
+    filename = tmp_path / "nothing.json"
+    assert load_debts(filename) == {}
+
+def test_save_debt_load_empty(tmp_path):
+
+    filename = tmp_path / "debts.json"
+    debts = {}
+    save_debts(debts,filename)
+    assert load_debts(filename) == {} 
+
 

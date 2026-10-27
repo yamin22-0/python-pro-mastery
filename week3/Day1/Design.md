@@ -41,19 +41,25 @@ On correct details:
 
 -User may try to pay but has no debt. `return False, "User doesn't exist." ` 
 
--User may try to pay more than they owe. `return False, "Amount exeeds debt balance."` 
+-User may try to pay more than they owe. `return False, "Payment exeeds debt balance."` 
 
 -User may try to add an amount of 0 or below 0. `return False, "Please enter valid amount."` *Nothing changes.*
 
 On correct details:
-    debts[name] -= amount
-    debts[name] = 0
-    del debts[name]
+    first do this debts[name] -= amount is the debt amount gets to 0 do debts[name] = 0 then when debt is fully 0 `delete` del debts[name]
 `return True, "payment recorded."`
+
+## save_debts(debts,filename) what it takes,returns and what could go wrong. ## 
+
+**save_debts(debts,filename)** Takes a dictionary and a filename and writes the dictionary into that file replacing what was there if none returns nothing.
+
+## load_debts(filename) what it takes,returns and what could go wrong. ## 
+
+**load_debts(debts,filename)** Loads the filename that was created and returns dictionary or {} if no data yet.
 
 ## What is saved ##
 
 **file name = debts.json**
 **file contents**
 
-`json {"amina":500,"binka":300}`
+`{"amina":500,"binka":300}` if empty returns `{}`

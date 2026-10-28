@@ -1,5 +1,5 @@
-from shop import parse_amount
-import pytest
+from shop import parse_amount,save_prices,load_prices
+import pytest,json
 
 # Tests for parse_amount(text) 
 
@@ -31,3 +31,36 @@ def test_parse_amount_empty():
 
     with pytest.raises(ValueError, match="Please enter price"):
         parse_amount(" ")
+
+def test_save_prices_and_load_prices(tmp_path):
+
+    filename = tmp_path / "prices.json"
+    prices = {"milk":60,"bread":80}
+    save_prices(prices,filename)
+
+    assert filename.exists()
+
+    loaded = load_prices(filename)
+    assert loaded == prices
+
+def test_load_prices_missing_file(tmp_path):
+
+    filename = tmp_path / "missing.json"
+    loaded = load_prices(filename)
+    assert loaded == {}
+
+def test_load_prices_damaged_file(tmp_path):
+
+    filename = tmp_path / "prices.json"
+    filename.write_text("this file is damaged.")
+    loaded = load_prices(filename)
+    assert loaded == {}
+
+def test_load_prices_empty_file(tmp_path):
+
+    filename = tmp_path / "prices.json"
+    filename.write_text(" ")
+    loaded = load_prices(filename)
+    assert loaded == {}
+
+

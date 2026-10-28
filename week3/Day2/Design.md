@@ -28,6 +28,14 @@ prices = {"milk":60.0, "bread":55.0 }
 
 on success returns the price as a float.
 
+## save_prices(prices,filename) what it takes,returns and what could go wrong. ## 
+
+**save_prices(prices,filename)** Takes a dictionary and a filename and writes the dictionary into that file replacing what was there if none returns nothing.
+
+## load_prices(filename) what it takes,returns and what could go wrong. ## 
+
+**load_prices(filename)** Loads the filename that was created and returns dictionary or {} if no data yet.
+
 ## What is saved ##
 
 **file name = prices.json**

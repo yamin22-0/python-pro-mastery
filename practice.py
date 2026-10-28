@@ -82,3 +82,23 @@ def valid_anagram(word1,word2):
 print(valid_anagram("silent","listen"))
 print(valid_anagram("cat","rat"))
 print(valid_anagram("aab","abb"))
+
+fruits = ["banana", "mango", "avocado", "banana", "kiwi"]
+
+def first_non_repeating(fruits):
+
+    counts = {}
+    
+    for fruit in fruits:
+        if fruit in counts:
+            counts[fruit] += 1
+        else:
+            counts[fruit] = 1
+    
+    for fruit in fruits:
+        if counts[fruit] == 1:
+            return fruit
+            
+    return None
+
+print(first_non_repeating(fruits))

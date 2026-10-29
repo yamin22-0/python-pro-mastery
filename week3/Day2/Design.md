@@ -9,6 +9,7 @@ A small shop list system that handles errors and doesn't crash.
 -A dictionary of prices have name(key) and text(value - stored as a float).
 -Name(key) is cleaned using `.strip()` and `.lower()`.
 -(text) is handled using Try, except Valueerror.
+-Price is checked if it's a number or is finite. use .`math` and `.finite`.
 
 **Example**
 
@@ -35,6 +36,20 @@ on success returns the price as a float.
 ## load_prices(filename) what it takes,returns and what could go wrong. ## 
 
 **load_prices(filename)** Loads the filename that was created and returns dictionary or {} if no data yet.
+
+## set_price(prices,name,text) what it takes,returns and what could go wrong. ## 
+
+**set_price(prices,name,text)** - takes in prices dictionary,name and text. `returns True, "message" or False, "message".`
+
+**What could go wrong**
+
+-User may try to leave name input empty. `raises ValueError, "Please enter a name."`
+
+-Name is cleaned using `.strip()` and `.lower()`.
+
+on success.
+prices[name] = price
+`return "Price set successfully."`
 
 ## What is saved ##
 

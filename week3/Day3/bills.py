@@ -38,6 +38,6 @@ def due_soon(bills,today,days):
     for name,bill in bills.items():
         soon = parse_date(bill["due"])
 
-        if -100 <= days_until(soon,today) <= days:
+        if 0 <= days_until(soon,today) <= days:
             result.append(name)
     return result

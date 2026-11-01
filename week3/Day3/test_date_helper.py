@@ -1,4 +1,5 @@
 from date_helper import parse_date,days_until
+from bills import add_bill
 import pytest
 from datetime import date
 
@@ -42,4 +43,75 @@ def test_days_until_equal():
 def test_days_until_negative():
 
     assert days_until(date(2026,11,10),date(2026,11,15)) == -5
+
+def test_add_bills_good():
+
+    bills = {}
+    name,amount,due_text = ("rent",30000,"2026-12-01")
+    result = add_bill(bills,name,amount,due_text)
+
+    assert result[0] == True
+    assert result[1] == "Bill added successfully."
+    assert bills["rent"] == {"amount":30000,"due":"2026-12-01"}
+
+def test_add_bills_good_stripping_date():
+
+    bills = {}
+    name,amount,due_text = ("rent",30000," 2026-12-01 ")
+    result = add_bill(bills,name,amount,due_text)
+
+    assert result[0] == True
+    assert result[1] == "Bill added successfully."
+    assert bills["rent"] == {"amount":30000,"due":"2026-12-01"}
+
+def test_add_bill_duplicate_name():
+
+    bills = {"entertainment": {"amount":2000,"due":"2026-12-05"}}
+    result = add_bill(bills,"entertainment",2000,"2026-12-05")
+
+    assert result[0] == False
+    assert bills["entertainment"] == {"amount":2000,"due":"2026-12-05"}
+
+def test_add_bill_empty_name():
+
+    bills = {}
+    result = add_bill(bills,"",3000,"2026-11-29")
+
+    assert result[0] == False
+    assert bills == {}
+
+def test_add_bill_zero_amount():
+
+    bills = {}
+    result = add_bill(bills,"detergents",0,"2026-11-29")
+
+    assert result[0] == False
+    assert bills == {}
+
+def test_add_bill_bad_date():
+
+    bills = {}
+    result = add_bill(bills,"rent",3000,"hello")
+
+    assert result[0] == False
+    assert bills == {}
+
+def test_add_bill_empty_name():
+
+    bills = {}
+    result = add_bill(bills,"",3000,"2026-11-29")
+
+    assert result[0] == False
+    assert bills == {}
+
+def test_add_bill_cleaning_name():
+
+    bills = {}
+    result = add_bill(bills," WATER ",5000,"2026-12-05")
+
+    assert result[0] == True
+    assert result[1] == "Bill added successfully."
+    assert "water" in bills
+    assert " WATER " not in bills
+    assert bills["water"] == {"amount":5000,"due":"2026-12-05"}
 

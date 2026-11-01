@@ -62,3 +62,9 @@ on success:
 
 **overdue_bills(bills, today)** takes in bills dictionary and today.
 returns - a list of bill (names)
+
+## due_soon(bills, today, days)  what it takes,returns and what could go wrong. ## 
+
+**due_soon(bills, today, days)** takes in bills dictionary and today and number of days.
+returns - a list of bill (names)
+

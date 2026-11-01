@@ -1,5 +1,5 @@
 from date_helper import parse_date,days_until
-from bills import add_bill,overdue_bills
+from bills import add_bill,overdue_bills,due_soon
 import pytest
 from datetime import date
 
@@ -167,3 +167,56 @@ def test_overdue_bills_yesterday():
 
     assert overdue_bills(bills,today) == ["fees"]
 
+def test_due_soon_due_today():
+
+    bills = {
+        "rent": {"amount":26000, "due":"2026-11-01"}
+    }
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == ["rent"]
+
+def test_due_soon_due_seven_days():
+
+    bills = {
+        "rent": {"amount":26000, "due":"2026-11-8"}
+    }
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == ["rent"]
+
+def test_due_soon_due_over_due_days():
+
+    bills = {
+        "rent": {"amount":26000, "due":"2026-11-09"}
+    }
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == []
+
+def test_due_soon_due_over_due():
+
+    bills = {
+        "rent": {"amount":26000, "due":"2026-10-09"}
+    }
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == []
+
+def test_due_soon_mixed():
+
+    bills = {
+        "rent": {"amount":26000, "due":"2026-11-01"},
+        "water": {"amount":6000, "due":"2026-11-08"},
+        "food": {"amount":20000, "due":"2026-10-28"}
+    }
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == ["rent","water"]
+
+def test_due_soon_empty():
+
+    bills = {}
+
+    today = date(2026, 11, 1)
+    assert due_soon(bills,today,7) == []

@@ -32,3 +32,12 @@ def overdue_bills(bills,today):
             result.append(name)
     return result
 
+def due_soon(bills,today,days):
+
+    result = []
+    for name,bill in bills.items():
+        soon = parse_date(bill["due"])
+
+        if -100 <= days_until(soon,today) <= days:
+            result.append(name)
+    return result

@@ -58,3 +58,7 @@ on success:
     bills[name] = {"amount":amount,"due_text":parsed_date.isoformat()}
     `return True, "Bill added successfully."`
 
+## overdue_bills(bills, today)  what it takes,returns and what could go wrong. ## 
+
+**overdue_bills(bills, today)** takes in bills dictionary and today.
+returns - a list of bill (names)

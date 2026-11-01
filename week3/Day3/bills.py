@@ -1,4 +1,4 @@
-from date_helper import parse_date
+from date_helper import parse_date,days_until
 from datetime import date
 
 def add_bill(bills,name,amount,due_text):
@@ -21,3 +21,14 @@ def add_bill(bills,name,amount,due_text):
         "amount":amount, "due":parsed_date.isoformat()
     }
     return True, "Bill added successfully."
+
+def overdue_bills(bills,today):
+
+    result = []
+    for name, bill in bills.items():
+        due = parse_date(bill["due"])
+
+        if days_until(due,today) < 0:
+            result.append(name)
+    return result
+

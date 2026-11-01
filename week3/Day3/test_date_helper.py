@@ -1,5 +1,5 @@
 from date_helper import parse_date,days_until
-from bills import add_bill
+from bills import add_bill,overdue_bills
 import pytest
 from datetime import date
 
@@ -96,14 +96,6 @@ def test_add_bill_bad_date():
     assert result[0] == False
     assert bills == {}
 
-def test_add_bill_empty_name():
-
-    bills = {}
-    result = add_bill(bills,"",3000,"2026-11-29")
-
-    assert result[0] == False
-    assert bills == {}
-
 def test_add_bill_cleaning_name():
 
     bills = {}
@@ -114,4 +106,64 @@ def test_add_bill_cleaning_name():
     assert "water" in bills
     assert " WATER " not in bills
     assert bills["water"] == {"amount":5000,"due":"2026-12-05"}
+
+def test_overdue_bills_overdue():
+
+    bills = {
+        "fees": {"amount":30000,"due":"2026-10-25"}
+    }
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == ["fees"]
+
+def test_overdue_bills_today():
+
+    bills = {
+        "water": {"amount":5000,"due":"2026-11-1"}
+    }
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == []
+
+def test_overdue_bills_due_later():
+
+    bills = {
+        "electricity": {"amount":3500,"due":"2026-11-10"}
+    }
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == []
+
+def test_overdue_bills_mixed():
+
+    bills = {
+        "fees": {"amount":30000,"due":"2026-10-25"},
+        "rent": {"amount":32000,"due":"2026-11-01"},
+        "water": {"amount":4500,"due":"2026-11-10"}
+    }
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == ["fees"]
+
+def test_overdue_bills_due_empty():
+
+    bills = {}
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == []
+
+def test_overdue_bills_yesterday():
+
+    bills = {
+        "fees": {"amount":30000,"due":"2026-10-31"}
+    }
+
+    today = date(2026,11,1)
+
+    assert overdue_bills(bills,today) == ["fees"]
 

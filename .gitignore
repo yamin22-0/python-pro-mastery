@@ -1,1 +1,2 @@
 *.json
+*.pytest_cache
